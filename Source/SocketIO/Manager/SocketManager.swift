@@ -459,6 +459,7 @@ open class SocketManager : NSObject, SocketManagerSpec, SocketParsable, SocketDa
         emitAll(clientEvent: .reconnectAttempt, data: [(reconnectAttempts - currentReconnectAttempt)])
 
         currentReconnectAttempt += 1
+        status = .notConnected
         connect()
 
         handleQueue.asyncAfter(deadline: DispatchTime.now() + Double(reconnectWait), execute: _tryReconnect)
